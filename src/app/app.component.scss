@@ -1,0 +1,24 @@
+/*Styling for non-component elements*/
+
+/*Global colors*/
+$primary: #4caf50;
+$primary-dark: #087f23;
+$secondary: #9fa8da;
+$secondary-dark: #6f79a8;
+
+.header {
+  background-color: $primary;
+  height: 50px;
+}
+
+.header-content {
+  width: 100%;
+  display: flex;
+}
+
+.content {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10%;
+  background-color: $secondary;
+}
