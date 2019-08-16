@@ -1,1 +1,7 @@
-<p>forms works!</p>
+<form [formGroup]="PurchasesForm" (ngSubmit)="onSubmit()">
+  <input type="text" placeholder="name" formControlName="name" />
+  <input type="text" placeholder="cost" formControlName="cost" />
+  <input type="text" placeholder="type" formControlName="type" />
+  <input type="text" placeholder="category" formControlName="category" />
+  <input type="submit" value="Submit" />
+</form>
