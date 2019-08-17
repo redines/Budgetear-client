@@ -1,7 +1,21 @@
-<form [formGroup]="PurchasesForm" (ngSubmit)="onSubmit()">
-  <input type="text" placeholder="name" formControlName="name" />
-  <input type="text" placeholder="cost" formControlName="cost" />
-  <input type="text" placeholder="type" formControlName="type" />
-  <input type="text" placeholder="category" formControlName="category" />
-  <input type="submit" value="Submit" />
-</form>
+<div class="card">
+  <div class="container">
+    <form [formGroup]="PurchasesForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <input type="text" placeholder="Name" formControlName="name" />
+      </div>
+      <div class="row">
+        <input type="text" placeholder="Type" formControlName="type" />
+      </div>
+      <div class="row">
+        <input type="text" placeholder="Category" formControlName="category" />
+      </div>
+      <div class="row">
+        <input type="number" placeholder="Cost" formControlName="cost" />
+      </div>
+      <div class="row">
+        <input class="submit-btn" type="submit" value="Submit" />
+      </div>
+    </form>
+  </div>
+</div>

@@ -6,7 +6,7 @@ import { Spendings } from 'api';
 @Component({
   selector: 'app-forms',
   templateUrl: './forms.component.html',
-  styleUrls: ['./forms.component.sass']
+  styleUrls: ['./forms.component.scss']
 })
 export class FormsComponent implements OnInit {
   constructor(private spendingservice: SpendingsService) {}

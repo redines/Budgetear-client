@@ -1,0 +1,25 @@
+input[type=number] {
+  width: 100%;
+  padding:5%;
+}
+
+input[type=text] {
+  width: 100%;
+  padding: 5%;
+}
+
+.submit-btn {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  margin: 2% 3%;
+  border-radius: 25%;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+}

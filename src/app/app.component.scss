@@ -1,4 +1,4 @@
-/*Styling for non-component elements*/
+/*Styling for non-component elements and layouting*/
 
 /*Global colors*/
 $primary: #4caf50;
@@ -6,7 +6,19 @@ $primary-dark: #087f23;
 $secondary: #9fa8da;
 $secondary-dark: #6f79a8;
 
+.main-container {
+  display: grid;
+  grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+}
+
+/*Page GRID layout*/
+.form-pos {
+  grid-area: 2 / 4;
+}
+
+/*HEADER styling*/
 .header {
+  grid-area: 1 / span 12;
   background-color: $primary;
   height: 50px;
 }
