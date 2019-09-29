@@ -18,7 +18,8 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { Spendings } from '../model/spendings';
+import { InlineObject } from '../model/inlineObject';
+import { Purchases } from '../model/purchases';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -27,7 +28,7 @@ import { Configuration }                                     from '../configurat
 @Injectable({
   providedIn: 'root'
 })
-export class SpendingsService {
+export class PurchasesService {
 
     protected basePath = 'http://localhost:3000';
     public defaultHeaders = new HttpHeaders();
@@ -60,14 +61,14 @@ export class SpendingsService {
 
 
     /**
-     * Get all spendings
+     * Get all Purchases
      * 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiBudgetsGet(observe?: 'body', reportProgress?: boolean): Observable<Spendings>;
-    public apiBudgetsGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Spendings>>;
-    public apiBudgetsGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Spendings>>;
+    public apiBudgetsGet(observe?: 'body', reportProgress?: boolean): Observable<Purchases>;
+    public apiBudgetsGet(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Purchases>>;
+    public apiBudgetsGet(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Purchases>>;
     public apiBudgetsGet(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -85,7 +86,7 @@ export class SpendingsService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.get<Spendings>(`${this.configuration.basePath}/api/budgets`,
+        return this.httpClient.get<Purchases>(`${this.configuration.basePath}/api/budgets`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -98,19 +99,22 @@ export class SpendingsService {
     /**
      * Add a new spending
      * 
+     * @param inlineObject 
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public apiBudgetsPost(observe?: 'body', reportProgress?: boolean): Observable<Spendings>;
-    public apiBudgetsPost(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Spendings>>;
-    public apiBudgetsPost(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Spendings>>;
-    public apiBudgetsPost(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public apiBudgetsPost(inlineObject: InlineObject, observe?: 'body', reportProgress?: boolean): Observable<any>;
+    public apiBudgetsPost(inlineObject: InlineObject, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<any>>;
+    public apiBudgetsPost(inlineObject: InlineObject, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<any>>;
+    public apiBudgetsPost(inlineObject: InlineObject, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+        if (inlineObject === null || inlineObject === undefined) {
+            throw new Error('Required parameter inlineObject was null or undefined when calling apiBudgetsPost.');
+        }
 
         let headers = this.defaultHeaders;
 
         // to determine the Accept header
         const httpHeaderAccepts: string[] = [
-            'application/json'
         ];
         const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         if (httpHeaderAcceptSelected !== undefined) {
@@ -119,10 +123,15 @@ export class SpendingsService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
+            'application/json'
         ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            headers = headers.set('Content-Type', httpContentTypeSelected);
+        }
 
-        return this.httpClient.post<Spendings>(`${this.configuration.basePath}/api/budgets`,
-            null,
+        return this.httpClient.post<any>(`${this.configuration.basePath}/api/budgets`,
+            inlineObject,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

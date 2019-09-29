@@ -11,10 +11,7 @@
  */
 
 
-export interface Spendings { 
-    /**
-     * the cost of the item
-     */
+export interface InlineObject { 
     cost?: number;
     name?: string;
     type?: string;

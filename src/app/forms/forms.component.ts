@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { SpendingsService } from 'api/api/spendings.service';
-import { Spendings } from 'api';
+import { PurchasesService } from 'api/api/purchases.service';
+import { Purchases } from 'api';
 
 @Component({
   selector: 'app-forms',
@@ -9,21 +9,21 @@ import { Spendings } from 'api';
   styleUrls: ['./forms.component.scss']
 })
 export class FormsComponent implements OnInit {
-  constructor(private spendingservice: SpendingsService) {}
+  constructor(private purchasesService: PurchasesService) {}
 
-  PurchasesForm: FormGroup;
+  Result: Purchases[] = [];
 
-  Result: Spendings[] = [];
+  PurchasesForm = new FormGroup({
+    cost: new FormControl(''),
+    name: new FormControl(''),
+    type: new FormControl(''),
+    category: new FormControl('')
+  });
+
+  addPurchase: Purchases = {};
 
   ngOnInit() {
-    this.PurchasesForm = new FormGroup({
-      cost: new FormControl(),
-      name: new FormControl(),
-      type: new FormControl(),
-      category: new FormControl()
-    });
-
-    this.spendingservice.apiBudgetsGet().subscribe(function(res) {
+    this.purchasesService.apiBudgetsGet().subscribe(function(res) {
       this.Result = res;
       console.log(this.Result);
     });
@@ -32,6 +32,11 @@ export class FormsComponent implements OnInit {
   onSubmit(): void {
     console.log('submited form');
     console.log(this.PurchasesForm.value);
-    this.spendingservice.apiBudgetsPost(this.PurchasesForm.value);
+
+    this.purchasesService
+      .apiBudgetsPost(this.PurchasesForm.value)
+      .subscribe(resp => {
+        console.log('resp', resp);
+      });
   }
 }

@@ -3,7 +3,7 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
-import { SpendingsService } from './api/spendings.service';
+import { PurchasesService } from './api/purchases.service';
 import { UserService } from './api/user.service';
 
 @NgModule({
@@ -11,7 +11,7 @@ import { UserService } from './api/user.service';
   declarations: [],
   exports:      [],
   providers: [
-    SpendingsService,
+    PurchasesService,
     UserService ]
 })
 export class ApiModule {
